@@ -1,6 +1,6 @@
 {
   "name": "mocha-suppress-logs",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A library to suppress logs for successful mocha tests",
   "main": "index.js",
   "scripts": {

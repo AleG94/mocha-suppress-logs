@@ -6,6 +6,7 @@
   "scripts": {
     "test": "mocha --recursive --exit",
     "coverage": "nyc --all npm test",
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint --ignore-path .gitignore .",
     "lint:fix": "eslint --ignore-path .gitignore . --fix"
   },
@@ -25,6 +26,7 @@
   "homepage": "https://github.com/AleG94/mocha-suppress-logs#readme",
   "devDependencies": {
     "chai": "^4.2.0",
+    "coveralls": "^3.1.0",
     "eslint": "^7.2.0",
     "mocha": "^7.2.0",
     "nyc": "^15.1.0",

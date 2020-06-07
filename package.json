@@ -1,11 +1,23 @@
 {
   "name": "mocha-suppress-logs",
   "version": "0.1.0",
-  "description": "A library to suppress logs for successful mocha tests",
+  "description": "Suppress logs and errors for successful mocha tests.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AleG94/mocha-suppress-logs.git"
+  },
+  "keywords": [
+    "mocha",
+    "logs"
+  ],
+  "author": "Alessandro Genovese",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AleG94/mocha-suppress-logs/issues"
+  },
+  "homepage": "https://github.com/AleG94/mocha-suppress-logs#readme"
 }

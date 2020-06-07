@@ -22,6 +22,10 @@ const afterEachCb = function () {
 };
 
 const suppress = function () {
+  if (typeof beforeEach !== 'function') {
+    throw Error('Mocha was not loaded');
+  }
+
   beforeEach(beforeEachCb);
   afterEach(afterEachCb);
 };

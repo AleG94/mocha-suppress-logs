@@ -81,4 +81,12 @@ describe('mocha-suppress-logs', () => {
 
     afterEachSpy.calledWith(afterEachCb).should.be.true;
   });
+
+  it('should throw an error if mocha was not loaded', () => {
+    const suppressLogs = rewire('..');
+
+    suppressLogs.__set__('beforeEach', undefined);
+
+    suppressLogs.should.throw('Mocha was not loaded');
+  });
 });

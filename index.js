@@ -21,7 +21,7 @@ const afterEachCb = function () {
   logCapture.reset();
 };
 
-const suppress = function () {
+const suppressLogs = function () {
   if (typeof beforeEach !== 'function') {
     throw Error('Mocha was not loaded');
   }
@@ -30,6 +30,6 @@ const suppress = function () {
   afterEach(afterEachCb);
 };
 
-module.exports = suppress;
+module.exports = suppressLogs;
 module.exports.beforeEachCb = beforeEachCb;
 module.exports.afterEachCb = afterEachCb;

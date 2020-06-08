@@ -16,7 +16,11 @@
   },
   "keywords": [
     "mocha",
-    "logs"
+    "suppress",
+    "console",
+    "output",
+    "logs",
+    "errors"
   ],
   "author": "Alessandro Genovese",
   "license": "MIT",

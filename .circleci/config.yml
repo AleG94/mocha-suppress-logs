@@ -13,7 +13,7 @@ jobs:
       - restore_cache:
           key: deps-{{ .Branch }}-{{ checksum "package.json" }}
       - run: 
-          name: Installing npm modules
+          name: Installing dependencies
           command: npm ci
       - save_cache:
           key: deps-{{ .Branch }}-{{ checksum "package.json" }}

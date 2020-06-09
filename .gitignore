@@ -3,3 +3,6 @@ node_modules
 
 # Coverage output directory
 .nyc_output
+
+# Npm config
+.npmrc

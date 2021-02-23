@@ -4,6 +4,7 @@
 [![NPM Version][npm-image]][npm-url]
 [![Coverage Status][coveralls-image]][coveralls-url]
 [![License][license-image]][license-url]
+[![Downloads][downloads-image]][downloads-url]
 
 
 Suppress console output of successful mocha tests.
@@ -56,3 +57,5 @@ describe('Something', () => {
 [npm-url]: https://npmjs.org/package/mocha-suppress-logs
 [license-image]: https://img.shields.io/npm/l/mocha-suppress-logs.svg
 [license-url]: https://github.com/AleG94/mocha-suppress-logs/blob/master/LICENSE
+[downloads-image]: https://img.shields.io/npm/dt/mocha-suppress-logs
+[downloads-url]: https://npmjs.org/package/mocha-suppress-logs

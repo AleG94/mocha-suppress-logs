@@ -11,42 +11,22 @@ Suppress console output of successful mocha tests.
 
 Ideal if you want to keep your test's report clean while still being able to debug the output of failed tests.
 
+## Requirements
+
+* [mocha](https://www.npmjs.com/package/mocha) (8.0.0 or higher)
+
 ## Installation
 
-```
+```bash
 npm install --save-dev mocha-suppress-logs
 ```
 
 ## Usage
 
-To suppress console output over the entire test suite, create a `setup.js` file under your `test` folder:
+Simply require `mocha-suppress-logs` when running `mocha`:
 
-```javascript
-// test/setup.js
-
-require('mocha-suppress-logs')();
-```
-
-Then preload it with mocha:
-
-```
-mocha --file test/setup.js
-```
-
-\
-If instead you want to suppress console output for a specific `describe` or `context` block:
-
-
-```javascript
-const suppressLogs = require('mocha-suppress-logs');
-
-describe('Something', () => {
-  suppressLogs();
-
-  it('should do something', () => {
-    // test code
-  });
-});
+```bash
+mocha --require mocha-suppress-logs
 ```
 
 [circleci-image]: https://circleci.com/gh/AleG94/mocha-suppress-logs.svg?style=svg

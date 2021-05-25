@@ -11,6 +11,8 @@ Suppress console output of successful mocha tests.
 
 Ideal if you want to keep your test's report clean while still being able to debug the output of failed tests.
 
+**Note**: For `mocha` version 7 or earlier, you must use version [0.2.0](https://www.npmjs.com/package/mocha-suppress-logs/v/0.2.0) of this package.
+
 ## Requirements
 
 * [mocha](https://www.npmjs.com/package/mocha) (8.0.0 or higher)

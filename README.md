@@ -31,6 +31,16 @@ Simply require `mocha-suppress-logs` when running `mocha`:
 mocha --require mocha-suppress-logs
 ```
 
+<br>
+
+Or put it in your [`.mocharc`](https://mochajs.org/#configuring-mocha-nodejs) to make it default behavior:
+
+```json
+{
+    "require": "mocha-suppress-logs"
+}
+```
+
 [circleci-image]: https://circleci.com/gh/AleG94/mocha-suppress-logs.svg?style=svg
 [circleci-url]: https://circleci.com/gh/AleG94/mocha-suppress-logs
 [coveralls-image]: https://coveralls.io/repos/github/AleG94/mocha-suppress-logs/badge.svg?branch=master

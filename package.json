@@ -1,6 +1,6 @@
 {
   "name": "mocha-suppress-logs",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Suppress console output of successful mocha tests.",
   "main": "index.js",
   "scripts": {

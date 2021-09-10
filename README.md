@@ -33,7 +33,7 @@ mocha --require mocha-suppress-logs
 
 <br>
 
-Or put it in your [`.mocharc`](https://mochajs.org/#configuring-mocha-nodejs) to make it default behavior:
+Or put it in your [`.mocharc.json`](https://mochajs.org/#configuring-mocha-nodejs) to make it default behavior:
 
 ```json
 {

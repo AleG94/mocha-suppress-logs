@@ -32,21 +32,21 @@ describe('mocha-suppress-logs', () => {
   });
 
   it('should print logs and errors when a test case fails', () => {
-    sinon.stub(process.stdout, 'write');
-    sinon.stub(process.stderr, 'write');
+    const stdout = sinon.stub(process.stdout, 'write');
+    const stderr = sinon.stub(process.stderr, 'write');
 
     mochaHooks.beforeEach();
 
     console.log(messages.log);
     console.error(messages.error);
 
-    process.stdout.write.called.should.be.false;
-    process.stderr.write.called.should.be.false;
+    stdout.called.should.be.false;
+    stderr.called.should.be.false;
 
     mochaHooks.afterEach.apply({ currentTest: { state: 'failed' } });
 
-    process.stdout.write.calledWith(messages.log + '\n').should.be.true;
-    process.stderr.write.calledWith(messages.error + '\n').should.be.true;
+    stdout.calledWith(messages.log + '\n').should.be.true;
+    stderr.calledWith(messages.error + '\n').should.be.true;
 
     sinon.restore();
   });

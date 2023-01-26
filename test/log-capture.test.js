@@ -23,9 +23,9 @@ describe('Log Capture', () => {
 
     logCapture.isCapturing().should.be.true;
 
-    for (const level of levels) {
+    levels.forEach(level => {
       console[level](...messages[level]);
-    }
+    });
 
     process.stdout.write.called.should.be.false;
     process.stderr.write.called.should.be.false;
@@ -38,10 +38,9 @@ describe('Log Capture', () => {
 
     const logs = logCapture.get();
 
-    for (const level in logs) {
-      logs[level].should.have.length(1);
-      logs[level][0].should.be.deep.equal(messages[level]);
-    }
+    levels.forEach(level => {
+      logs.should.deep.include({ level, args: messages[level] });
+    });
   });
 
   context('after capturing logs', () => {
@@ -49,7 +48,7 @@ describe('Log Capture', () => {
       logCapture.start();
 
       for (const level of levels) {
-        console[level](...messages[level]);
+        console[level](messages[level]);
       }
 
       logCapture.stop();
@@ -59,10 +58,7 @@ describe('Log Capture', () => {
       logCapture.reset();
 
       const logs = logCapture.get();
-
-      for (const level in logs) {
-        logs[level].should.have.length(0);
-      }
+      logs.should.have.length(0);
     });
   });
 });

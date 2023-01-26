@@ -9,13 +9,7 @@ exports.mochaHooks = {
     logCapture.stop();
 
     if (this.currentTest.state !== 'passed') {
-      const logs = logCapture.get();
-
-      for (const level in logs) {
-        for (const args of logs[level]) {
-          console[level](...args);
-        }
-      }
+      logCapture.print();
     }
 
     logCapture.reset();

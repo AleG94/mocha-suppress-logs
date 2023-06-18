@@ -38,9 +38,10 @@ describe('Log Capture', () => {
 
     const logs = logCapture.get();
 
-    for (const level in logs) {
-      logs[level].should.have.length(1);
-      logs[level][0].should.be.deep.equal(messages[level]);
+    logs.length.should.be.equal(levels.length);
+
+    for (const level of levels) {
+      logs.should.deep.include({ level, args: messages[level] });
     }
   });
 
@@ -60,9 +61,7 @@ describe('Log Capture', () => {
 
       const logs = logCapture.get();
 
-      for (const level in logs) {
-        logs[level].should.have.length(0);
-      }
+      logs.should.have.length(0);
     });
   });
 });

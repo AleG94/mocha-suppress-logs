@@ -2,66 +2,86 @@
 const chai = require('chai');
 const sinon = require('sinon');
 const logCapture = require('../lib/log-capture');
-
-chai.should();
+const should = chai.should();
 
 describe('Log Capture', () => {
-  const levels = ['log', 'debug', 'info', 'warn', 'error'];
-  const messages = {
-    log: ['log', 'this is a log message'],
-    debug: ['debug', 'this is a debug message'],
-    info: ['info', 'this is an info message'],
-    warn: ['warn', 'this is a warning message'],
-    error: ['error', 'this is an error message']
-  };
+  const logs = [
+    {
+      level: 'log',
+      stream: 'stdout',
+      content: ['log', 'this is a log message']
+    },
+    {
+      level: 'error',
+      stream: 'stderr',
+      content: ['error', 'this is an error message']
+    }
+  ];
 
   it('should capture logs', () => {
-    sinon.stub(process.stdout, 'write');
-    sinon.stub(process.stderr, 'write');
+    const stderrWriteStub = sinon.stub(process.stderr, 'write');
+    const stdoutWriteStub = sinon.stub(process.stdout, 'write');
 
     logCapture.start();
-
     logCapture.isCapturing().should.be.true;
 
-    for (const level of levels) {
-      console[level](...messages[level]);
+    for (const message of logs) {
+      console[message.level](...message.content);
     }
 
-    process.stdout.write.called.should.be.false;
-    process.stderr.write.called.should.be.false;
+    stdoutWriteStub.called.should.be.false;
+    stderrWriteStub.called.should.be.false;
 
     logCapture.stop();
-
     logCapture.isCapturing().should.be.false;
 
-    sinon.restore();
+    const capturedLogs = logCapture.get();
 
-    const logs = logCapture.get();
+    capturedLogs.length.should.be.equal(logs.length);
 
-    logs.length.should.be.equal(levels.length);
-
-    for (const level of levels) {
-      logs.should.deep.include({ level, args: messages[level] });
+    for (const log of logs) {
+      capturedLogs.should.deep.include({ stream: log.stream, text: log.content.join(' ') + '\n' });
     }
+
+    sinon.restore();
+  });
+
+  it('throws an error when trying to print logs while capturing', () => {
+    logCapture.start();
+
+    should.throw(() => logCapture.print());
+
+    logCapture.stop();
   });
 
   context('after capturing logs', () => {
     beforeEach(() => {
+      logCapture.reset();
       logCapture.start();
 
-      for (const level of levels) {
-        console[level](...messages[level]);
+      for (const message of logs) {
+        console[message.level](...message.content);
       }
 
       logCapture.stop();
     });
 
+    it('should print logs', () => {
+      sinon.stub(process.stderr, 'write');
+      sinon.stub(process.stdout, 'write');
+
+      logCapture.print();
+
+      for (const message of logs) {
+        process[message.stream].write.calledWith(message.content.join(' ') + '\n').should.be.true;
+      }
+
+      sinon.restore();
+    });
+
     it('should reset captured logs', () => {
       logCapture.reset();
-
-      const logs = logCapture.get();
-
-      logs.should.have.length(0);
+      logCapture.get().should.have.length(0);
     });
   });
 });

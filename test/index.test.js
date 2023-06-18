@@ -2,52 +2,33 @@
 const chai = require('chai');
 const sinon = require('sinon');
 const { mochaHooks } = require('../index');
+const logCapture = require('../lib/log-capture');
 
 chai.should();
 
 describe('mocha-suppress-logs', () => {
-  const messages = {
-    log: 'this is a message log',
-    error: 'this is an error log'
-  };
+  afterEach(() => sinon.restore());
+
+  it('should be capturing during a test case', () => {
+    mochaHooks.beforeEach();
+    logCapture.isCapturing().should.be.true;
+    mochaHooks.afterEach.apply({ currentTest: { state: 'passed' } });
+    logCapture.isCapturing().should.be.false;
+  });
 
   it('should suppress logs and errors when a test case passes', () => {
-    sinon.stub(process.stdout, 'write');
-    sinon.stub(process.stderr, 'write');
+    sinon.stub(logCapture, 'print');
 
     mochaHooks.beforeEach();
-
-    console.log(messages.log);
-    console.error(messages.error);
-
-    process.stdout.write.called.should.be.false;
-    process.stderr.write.called.should.be.false;
-
     mochaHooks.afterEach.apply({ currentTest: { state: 'passed' } });
-
-    process.stdout.write.called.should.be.false;
-    process.stderr.write.called.should.be.false;
-
-    sinon.restore();
+    logCapture.print.called.should.be.false;
   });
 
   it('should print logs and errors when a test case fails', () => {
-    sinon.stub(process.stdout, 'write');
-    sinon.stub(process.stderr, 'write');
+    sinon.stub(logCapture, 'print');
 
     mochaHooks.beforeEach();
-
-    console.log(messages.log);
-    console.error(messages.error);
-
-    process.stdout.write.called.should.be.false;
-    process.stderr.write.called.should.be.false;
-
     mochaHooks.afterEach.apply({ currentTest: { state: 'failed' } });
-
-    process.stdout.write.calledWith(messages.log + '\n').should.be.true;
-    process.stderr.write.calledWith(messages.error + '\n').should.be.true;
-
-    sinon.restore();
+    logCapture.print.called.should.be.true;
   });
 });

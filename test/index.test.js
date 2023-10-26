@@ -12,6 +12,7 @@ describe('mocha-suppress-logs', () => {
   it('should be capturing during a test case', () => {
     mochaHooks.beforeEach();
     logCapture.isCapturing().should.be.true;
+    console.log('✅ Test passed');
     mochaHooks.afterEach.apply({ currentTest: { state: 'passed' } });
     logCapture.isCapturing().should.be.false;
   });
@@ -20,6 +21,7 @@ describe('mocha-suppress-logs', () => {
     sinon.stub(logCapture, 'print');
 
     mochaHooks.beforeEach();
+    console.log('❌ Test failed');
     mochaHooks.afterEach.apply({ currentTest: { state: 'passed' } });
     logCapture.print.called.should.be.false;
   });

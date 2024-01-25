@@ -17,7 +17,7 @@ describe('mocha-suppress-logs', () => {
     logCapture.isCapturing().should.be.false;
   });
 
-  it('should work for silent tests cases', () => {
+  it('should work for silent test cases', () => {
     mochaHooks.beforeEach();
     logCapture.isCapturing().should.be.true;
     mochaHooks.afterEach.apply({ currentTest: { state: 'passed' } });

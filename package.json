@@ -30,6 +30,7 @@
   "homepage": "https://github.com/AleG94/mocha-suppress-logs#readme",
   "devDependencies": {
     "chai": "^4.3.4",
+    "clone": "^2.1.2",
     "coveralls": "^3.1.0",
     "eslint": "^7.27.0",
     "mocha": "^8.4.0",

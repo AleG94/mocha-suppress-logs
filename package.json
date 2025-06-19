@@ -28,15 +28,15 @@
     "url": "https://github.com/AleG94/mocha-suppress-logs/issues"
   },
   "homepage": "https://github.com/AleG94/mocha-suppress-logs#readme",
-  "dependencies": {
-    "clone": "^2.1.2"
-  },
   "devDependencies": {
     "chai": "^4.3.4",
     "coveralls": "^3.1.0",
-    "eslint": "^7.27.0",
+    "eslint": "^8.57.1",
     "mocha": "^8.4.0",
     "nyc": "^15.1.0",
     "sinon": "^10.0.0"
+  },
+  "engines": {
+    "node": ">=17.0.0"
   }
 }
